@@ -1,0 +1,55 @@
+<form [formGroup]="service.form" class="normal-form" style="font-size: 13px">
+  <mat-grid-list cols="3" rowHeight="60px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="linkName" matInput placeholder="Link Name*">
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="zipCodeA" matInput placeholder="Zip Code A (xx-xxx)*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="zipCodeB" matInput placeholder="Zip Code B (xx-xxx)*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+<form (ngSubmit)="showLocation()" style="margin-top: 0px;" class="form-group">
+<input type="text" [(ngModel)]="address1" required [ngModelOptions]="{standalone: true}" placeholder="paste zipCodeA here">
+<input type="text" [(ngModel)]="address2" required [ngModelOptions]="{standalone: true}" placeholder="paste zipCodeB here">
+<button class="btn btn-success" style="margin-left: 5px;" (click)="showLocation()">Search</button>
+</form>
+<agm-map
+  [latitude]="location1?.lat"
+  [longitude]="location1?.lng"
+  [latitude]="location2?.lat"
+  [longitude]="location2?.lng"
+  [zoom]="8"
+  [disableDefaultUI]="false"
+  [zoomControl]="false">
+  <agm-polyline [strokeColor]="'#2196f3'">
+    <agm-polyline-point [latitude]="location1?.lat" [longitude]="location1?.lng"></agm-polyline-point>
+    <agm-polyline-point [latitude]="location2?.lat" [longitude]="location2?.lng"></agm-polyline-point>
+  </agm-polyline>
+  <agm-marker
+      [latitude]="location1?.lat"
+      [longitude]="location1?.lng"
+      >
+  </agm-marker>
+  <agm-marker
+      [latitude]="location2?.lat"
+      [longitude]="location2?.lng">
+  </agm-marker>
+</agm-map>
+<p *ngIf="loading">Loading...</p>

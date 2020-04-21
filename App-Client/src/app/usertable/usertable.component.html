@@ -1,0 +1,81 @@
+<div class="search-div">
+  <button mat-raised-button color="primary" (click)="onCreate()">
+    <mat-icon style="color: limegreen; text-align: center;">add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8" style="font-size: small;">
+  <mat-table [dataSource]="dataSource" matSort matSortActive="operator" matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="linkName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>linkName</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.linkName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="operator">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Operator</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.operator}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cityA">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>cityA</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.cityA}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="zipCodeA">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>zipCodeA</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.zipCodeA}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="streetA">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>streetA</mat-header-cell>
+      <mat-cell *matCellDef="let link mat-sort-header">{{link.streetA}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cityB">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>cityB</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.cityB}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="zipCodeB">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>zipCodeB</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.zipCodeB}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="streetB">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>streetB</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.streetB}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="linkLength">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>linkLength</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.linkLength}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subscriptionFee">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>subscriptionFee</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.subscriptionFee}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="technology">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>technology</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.technology}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="accent" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="accent" (click)="onMap(row)"><mat-icon>language</mat-icon></button>
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>description</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.description}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef cosplan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: lightgray;"
+     color="primary"></mat-header-row>
+    <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': dataSource!=null}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator style-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>

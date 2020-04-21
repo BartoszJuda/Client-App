@@ -1,0 +1,79 @@
+<form [formGroup]="service.form" class="normal-form" style="font-size: 13px" (submit)="onSubmit()">
+  <mat-grid-list cols="3" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="id">
+        <mat-form-field>
+          <mat-select formControlName="operator" name="operator" placeholder="OA*">
+            <mat-option>None</mat-option>
+            <ng-container *ngFor="let operator of operators">
+              <mat-option value="{{operator.operatorName}}">{{operator.id}} - {{operator.operatorName}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="cityA" matInput placeholder="City A*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="cityB" matInput placeholder="City B*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="linkLength" matInput placeholder="Link Length [km]*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="linkName" matInput placeholder="Link Name*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="zipCodeA" matInput placeholder="Zip Code A (xx-xxx)*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="zipCodeB" matInput placeholder="Zip Code B (xx-xxx)*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="subscriptionFee" matInput placeholder="Subscription Fee [PLN]*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <div class="add-bottom-padding">
+          <mat-radio-group formControlName="technology">
+            <mat-radio-button value="ME">ME</mat-radio-button>
+            <mat-radio-button value="EOS">EOS</mat-radio-button>
+            <mat-radio-button value="TPIX">TPIX</mat-radio-button>
+            <mat-radio-button value="RLLO">RLLO</mat-radio-button>
+            <mat-radio-button value="MBR">MBR</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <mat-form-field>
+          <input formControlName="streetA" matInput placeholder="Street A*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="streetB" matInput placeholder="Street B*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="description" matInput placeholder="Description*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
