@@ -77,7 +77,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatButtonModule,
     MatSnackBarModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCx47HHywheEZtoTN9h2UTVXtHjEDuNl7w'
+      apiKey: 'YOUR_API_KEY'
     }),
     FontAwesomeModule,
   ],
