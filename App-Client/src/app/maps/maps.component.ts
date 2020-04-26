@@ -36,6 +36,7 @@ export class MapsComponent implements OnInit {
     private ref: ChangeDetectorRef,
     private mainService: MainService,
     public service: LinkService,
+    public dialogRef: MatDialogRef<MapsComponent>
   ) { }
 
   ngOnInit(
@@ -69,5 +70,11 @@ export class MapsComponent implements OnInit {
         this.ref.detectChanges();
       }
     );
+  }
+
+  onClose(){
+    this.service.form.reset();
+    this.service.initializeFormGroup();
+    this.dialogRef.close();
   }
 }

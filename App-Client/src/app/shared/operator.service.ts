@@ -48,4 +48,11 @@ export class OperatorService {
   populateForm(operator){
     this.form.patchValue(operator);
   }
+
+  delete(id: number){
+    this.mainService.deleteOperator(id).subscribe(data => {
+      let res:any = data;
+      console.log("ok")
+    })
+  }
 }

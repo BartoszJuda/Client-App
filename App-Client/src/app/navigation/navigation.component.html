@@ -15,11 +15,10 @@
         <a class="nav-link" routerLink="/dashboard" href="#">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/maps" href="#">Show on Map</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" routerLink="/about" href="#">About</a>
       </li>
+      <button class="btn btn-small" (click)="sendEmail()">Report</button>
+      <button mat-icon-button color="accent" style="margin-left: 10px;" (click)="refresh()"><mat-icon>update</mat-icon></button>
     </ul>
   </div>
 </nav>

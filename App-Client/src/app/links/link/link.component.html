@@ -1,3 +1,9 @@
+<mat-toolbar>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-mat-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
 <form [formGroup]="service.form" class="normal-form" style="font-size: 13px" (submit)="onSubmit()">
   <mat-grid-list cols="3" rowHeight="300px">
     <mat-grid-tile>

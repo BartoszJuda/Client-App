@@ -4,6 +4,7 @@ import { LinkDto } from './models/link-dto';
 import { Observable } from 'rxjs';
 import {HttpClient, HttpResponse, HttpParams} from '@angular/common/http'
 import { OperatorDto } from './models/operator-dto';
+import { Email } from './models/email';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class MainService {
      return this.http.get<Array<LinkDto>>('http://localhost:8080/api/links/dto')
   }
 
-  putLink(id: number, link: LinkDto){
+  putLink(id:number, link: LinkDto){
     return this.http.put('http://localhost:8080/api/links' + id, link);
   }
 
@@ -66,6 +67,14 @@ export class MainService {
   }
 
   deleteLink(id: number){
-    return this.http.delete('http://localhost:8080/api/links/dto')
+    return this.http.delete(`http://localhost:8080/api/links/dto/${id}`)
+  }
+
+  sendEmail(email: Email){
+    return this.http.post('http://localhost:8080/feedbackAttachment', email)
+  }
+
+  deleteOperator(id: number){
+    return this.http.delete(`http://localhost:8080/api/links/operators/${id}`)
   }
 }

@@ -1,3 +1,4 @@
+import { NotificationService } from './../shared/notification.service';
 import { OperatorService } from './../shared/operator.service';
 import { MainService } from './../main.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -6,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import {OperatorComponent} from '../operators/operator/operator.component'
+import { ConfirmDialogService } from '../shared/confirm-dialog.service';
 
 @Component({
   selector: 'app-operators',
@@ -23,7 +25,9 @@ export class OperatorsComponent implements OnInit {
 
   constructor(private mainService: MainService,
     private dialog: MatDialog,
-    private service: OperatorService) { }
+    private service: OperatorService,
+    private notificationService: NotificationService,
+    private dialogService: ConfirmDialogService) { }
 
   ngOnInit(): void {
     this.mainService.getOperators().subscribe(results => {
@@ -64,4 +68,13 @@ export class OperatorsComponent implements OnInit {
     this.dialog.open(OperatorComponent, dialogConfig);
   }
 
+  onDelete(id){
+    this.dialogService.openConfirmDialog('Are you sure to delete this record?')
+    .afterClosed().subscribe(res => {
+      if(res){
+        this.service.delete(id);
+        this.notificationService.warn('! Deleted Successfully');
+      }
+    });
+    }
 }

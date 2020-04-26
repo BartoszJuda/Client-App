@@ -2,11 +2,12 @@ import { OperatorComponent } from './../operators/operator/operator.component';
 import { OperatorDto } from 'src/app/models/operator-dto';
 import { LinkDto } from 'src/app/models/link-dto';
 import { MainService } from './../main.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, Form } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient, HttpResponse, HttpParams} from '@angular/common/http';
 import *as _ from 'lodash';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class LinkService {
   links: Array<LinkDto> = new Array<LinkDto>();
 
   form: FormGroup = new FormGroup({
-    id: new FormControl(''),
+    id: new FormControl(null),
     operator: new FormControl(0, Validators.required),
     linkName: new FormControl('', Validators.required),
     cityA: new FormControl('', Validators.required),
@@ -82,30 +83,33 @@ export class LinkService {
     });
   }
 
-  create(link) {
-      let result: LinkDto={
-      linkName: link.linkName, //sprawdzic wywalajac this
-      operator: link.operator,
-      cityA: link.cityA,
-      zipCodeA: link.zipCodeA,
-      streetA: link.streetA,
-      cityB: link.cityB,
-      zipCodeB: link.zipCodeB,
-      streetB: link.streetB,
-      technology: link.technology,
-      linkLength: link.linkLength,
-      subscriptionFee: link.subscriptionFee,
-      description: link.description,
-    }
-    this.mainService.postLink(result).subscribe(link => {}, (err: Error) => {console.log(err.message)},)
-  }
+   create(link) {
+       let result: LinkDto={
+       linkName: link.linkName,
+       operator: link.operator,
+       cityA: link.cityA,
+       zipCodeA: link.zipCodeA,
+       streetA: link.streetA,
+       cityB: link.cityB,
+       zipCodeB: link.zipCodeB,
+       streetB: link.streetB,
+       technology: link.technology,
+       linkLength: link.linkLength,
+       subscriptionFee: link.subscriptionFee,
+       description: link.description,
+     }
+     this.mainService.postLink(result).subscribe(link => {}, (err: Error) => {console.log(err.message)},)
+   }
   update(id: number, link):void{
     this.mainService.putLink(id, link).subscribe(link => {
     }, (err: Error) => {console.log(err.message)}, () => {this.flag = false; this.getLinks()});
   }
 
   delete(id: number){
-    this.mainService.deleteLink(id);
+    this.mainService.deleteLink(id).subscribe(data => {
+      let res:any = data;
+      console.log("ok")
+    })
   }
 
   populateForm(link){

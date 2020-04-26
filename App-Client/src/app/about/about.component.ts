@@ -12,9 +12,5 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  incrementCounter(){
-    this.mainService.counter += 1;
-  }
-
+  
 }

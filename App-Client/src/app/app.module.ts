@@ -1,8 +1,9 @@
+import { EmailService } from './shared/email.service';
 import { LinkService } from './shared/link.service';
 import {OperatorService} from './shared/operator.service'
 import { AppRoutingModule } from './app-router.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NgZone } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
@@ -35,6 +36,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapsComponent } from './maps/maps.component';
 import {AgmCoreModule} from '@agm/core';
 import { GeocodeService } from './shared/geocode.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EmailComponent } from './email/email.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -49,6 +53,8 @@ import { GeocodeService } from './shared/geocode.service';
     OperatorComponent,
     DashboardComponent,
     MapsComponent,
+    EmailComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,17 +77,19 @@ import { GeocodeService } from './shared/geocode.service';
     MatButtonModule,
     MatSnackBarModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyCx47HHywheEZtoTN9h2UTVXtHjEDuNl7w'
     }),
+    FontAwesomeModule,
   ],
   providers: [
     MainService,
     LinkService,
     OperatorService,
     GeocodeService,
+    EmailService,
     { provide: MatDialogRef, useValue: {} },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LinkComponent, OperatorComponent, MapsComponent]
+  entryComponents: [LinkComponent, OperatorComponent, MapsComponent, EmailComponent, ConfirmDialogComponent]
 })
 export class AppModule { }

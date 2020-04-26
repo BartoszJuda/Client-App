@@ -6,6 +6,7 @@ import { OperatorDto } from 'src/app/models/operator-dto';
 import { LinkDto } from 'src/app/models/link-dto';
 import { Router } from '@angular/router';
 import {MatDialogRef} from '@angular/material/dialog';
+import { AnimationDurations } from '@angular/material/core';
 
 @Component({
   selector: 'app-link',
@@ -57,6 +58,10 @@ export class LinkComponent implements OnInit {
     this.service.form.reset();
     this.service.initializeFormGroup();
     this.dialogRef.close();
+  }
+
+  refresh(): void{
+    window.location.reload();
   }
 
 }

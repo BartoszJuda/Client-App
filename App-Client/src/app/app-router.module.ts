@@ -1,3 +1,4 @@
+import { EmailComponent } from './email/email.component';
 import { MapsComponent } from './maps/maps.component';
 import { OperatorsComponent } from './operators/operators.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'maps',
     component: MapsComponent
+  },
+  {
+    path: 'email',
+    component: EmailComponent
   },
   {
     path: '',

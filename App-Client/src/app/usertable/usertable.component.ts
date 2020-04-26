@@ -1,3 +1,5 @@
+import { ConfirmDialogService } from './../shared/confirm-dialog.service';
+import { NotificationService } from './../shared/notification.service';
 import { LinkService } from './../shared/link.service';
 import { LinksComponent } from './../links/links.component';
 import { LinkDto } from './../models/link-dto';
@@ -35,7 +37,9 @@ export class UsertableComponent implements OnInit {
 
   constructor(private mainService: MainService,
     private dialog: MatDialog,
-    private service: LinkService) { }
+    private service: LinkService,
+    private notificationService: NotificationService,
+    private dialogService: ConfirmDialogService) { }
 
   ngOnInit(): void {
     this.mainService.getLinks().subscribe(results => {
@@ -79,5 +83,15 @@ export class UsertableComponent implements OnInit {
   this.service.populateForm(row);
   const dialogConfig = new MatDialogConfig();
   this.dialog.open(MapsComponent, dialogConfig);
+}
+
+onDelete(id){
+this.dialogService.openConfirmDialog('Are you sure to delete this record?')
+.afterClosed().subscribe(res => {
+  if(res){
+    this.service.delete(id);
+    this.notificationService.warn('! Deleted Successfully');
+  }
+});
 }
 }

@@ -9,8 +9,12 @@
     </button>
   </mat-form-field>
 </div>
-<div class="mat-elevation-z8" style="font-size: small;">
+<div class="mat-elevation-z8" style="font-size: small; width: 1200px;">
   <mat-table [dataSource]="dataSource" matSort matSortActive="operator" matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+      <mat-cell *matCellDef="let link">{{link.id}}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="linkName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>linkName</mat-header-cell>
       <mat-cell *matCellDef="let link">{{link.linkName}}</mat-cell>
@@ -18,7 +22,6 @@
     <ng-container matColumnDef="operator">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Operator</mat-header-cell>
       <mat-cell *matCellDef="let link">{{link.operator}}</mat-cell>
-    </ng-container>
     <ng-container matColumnDef="cityA">
       <mat-header-cell *matHeaderCellDef mat-sort-header>cityA</mat-header-cell>
       <mat-cell *matCellDef="let link">{{link.cityA}}</mat-cell>
@@ -60,7 +63,7 @@
       <mat-cell *matCellDef="let row">
         <button mat-icon-button color="accent" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
         <button mat-icon-button color="accent" (click)="onMap(row)"><mat-icon>language</mat-icon></button>
-        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="description">
@@ -76,6 +79,7 @@
      color="primary"></mat-header-row>
     <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
     <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': dataSource!=null}"></mat-footer-row>
+  </ng-container>
   </mat-table>
   <mat-paginator style-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>
